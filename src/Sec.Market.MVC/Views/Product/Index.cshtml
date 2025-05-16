@@ -1,0 +1,54 @@
+﻿@model Sec.Market.MVC.Models.CatalogModelView
+
+@{
+    ViewData["Title"] = "Accueil";
+}
+<section class="esh-catalog-hero">
+    <div class="container">
+    </div>
+</section>
+
+<section class="esh-catalog-filters">
+    <div class="container">
+        <form asp-action="Index" asp-controller="Product" method="post">
+            @Html.AntiForgeryToken()
+            <label class="esh-catalog-label" data-title="type">
+                
+                <input asp-for="FilterText" class="esh-catalog-filter"/>
+            </label>
+            <input class="esh-catalog-send" type="image" src="~/images/arrow-right.svg" />
+        </form>
+    </div>
+</section>
+
+<div class="container">
+    <div class="row">
+        <br />
+        @if (ViewBag.BasketInoperativeMsg != null)
+        {
+            <div class="alert alert-warning" role="alert">
+                &nbsp;@ViewBag.BasketInoperativeMsg
+            </div>
+        }
+    </div>
+
+    @if (Model.Products.Count() > 0)
+    {
+        
+
+        <div class="esh-catalog-items row">
+            @foreach (var item in Model.Products)
+            {
+                <div class="esh-catalog-item col-md-4">
+                    <partial name="_product" model="item" />
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="esh-catalog-items row">
+            AUCUN PRODUIT NE CORRESPOND A VOS CRITÈRES DE RECHERCHE
+        </div>
+    }
+</div>

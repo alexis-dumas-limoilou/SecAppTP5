@@ -1,0 +1,24 @@
+﻿@model IEnumerable<Sec.Market.MVC.Models.CustomerReview>
+
+@{
+    ViewData["Title"] = "Index";
+
+    var id = ViewBag.Id;
+}
+
+<h1>Avis sur le produit : @id</h1>
+
+<p>
+    <a asp-action="Create" asp-route-id="@id">Ajouter un avis</a>
+</p>
+
+<div>
+    <hr />
+@foreach (var item in Model) {
+     <div>
+         <p>@Html.Raw(item.Comment)</p>
+         <p>par @item.CustomerEmail</p>
+     </div>  
+     <hr />
+}
+</div>  

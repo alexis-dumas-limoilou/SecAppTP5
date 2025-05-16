@@ -1,0 +1,95 @@
+﻿@model Sec.Market.MVC.Models.OrderData
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="container">
+    <form method="post" asp-controller="Order" asp-action="Create">
+        @Html.AntiForgeryToken()
+        <section class="esh-orders_new-section">
+            <div class="row">
+                @foreach (var error in ViewData.ModelState.Values.SelectMany(err => err.Errors))
+                {
+                    <div class="alert alert-warning" role="alert">
+                        &nbsp;@error.ErrorMessage
+                    </div>
+                }
+            </div>
+            <h4 class="esh-orders_new-title">Adresse de livraison</h4>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="ShippingAdress" class="esh-orders_new-title">Adresse</label>
+                        <input asp-for="ShippingAdress" class="form-control form-input" type="text" placeholder="Adresse de livraison" />
+                        <span asp-validation-for="ShippingAdress" class="alert alert-danger" />
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="esh-orders_new-section">
+            <h4 class="esh-orders_new-title">Paiement par carte</h4>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="CardNumber" class="esh-orders_new-title">Numéro</label>
+                        <input asp-for="CardNumber" class="form-control form-input" type="text" placeholder="000000000000000" />
+                        <span asp-validation-for="CardNumber" class="alert alert-danger" />
+                    </div>
+                </div>
+                <br/>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="CardOwner" class="esh-orders_new-title">Nom sur la carte de credit</label>
+                        <input asp-for="CardOwner" class="form-control form-input" type="text" placeholder="Nom sur la carte" />
+                        <span asp-validation-for="CardOwner" class="alert alert-danger" />
+                    </div>
+                </div>
+                <br/>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="CardType" class="esh-orders_new-title">Type de carte</label>
+                        <input asp-for="CardType" class="form-control form-input" type="text" placeholder="Type de carte" />
+                        <span asp-validation-for="CardType" class="alert alert-danger" />
+                    </div>
+                </div>
+                <br/>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="CardExpirationDate" class="esh-orders_new-title">Date Expiration</label>
+                        <input asp-for="CardExpirationDate" class="form-control form-input form-input-medium" type="text" placeholder="MM/YY" />
+                        <span asp-validation-for="CardExpirationDate" class="alert alert-danger" />
+                    </div>
+                </div>
+                <br/>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="CardSecurityCode" class="esh-orders_new-title">Code de sécurité</label>
+                        <input asp-for="CardSecurityCode" class="form-control form-input form-input-small" type="text" placeholder="000" />
+                        <span asp-validation-for="CardSecurityCode" class="alert alert-danger" />
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        @await Html.PartialAsync("_OrderItem")
+
+        <section class="esh-orders_new-section">
+            <div class="form-group row">
+                <div class="col-md-9">
+                </div>
+                <div class="col-md-2">
+                    <input type="submit" value="[ Commander ]" name="action" class="btn esh-orders_new-placeOrder" />
+                </div>
+            </div>
+        </section>
+        <input asp-for="ProductId" type="hidden" value="@Model.ProductId" />
+        <input asp-for="UserId" type="hidden" value="@Model.UserId" />
+    </form>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

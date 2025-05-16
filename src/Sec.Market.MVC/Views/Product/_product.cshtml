@@ -1,0 +1,22 @@
+﻿@model Product
+
+
+<img class="esh-catalog-thumbnail" src="~/images/@Model.Image" />
+
+<div>
+    <a class="esh-catalog-button" asp-action="Create" asp-controller="Order" asp-route-id="@Model.Id">[ COMMANDER ]</a>
+</div>
+    <div class="esh-catalog-name">
+        <span>@Model.Name</span>
+    </div>
+    <div class="esh-catalog-price">
+        <span>@Model.Price.ToString("N2")</span>
+    </div>
+<div>
+    <a class="esh-catalog-button" asp-action="Index" asp-controller="Reviews" asp-route-id="@Model.Id">[ Avis clients ]</a>
+</div>
+
+@*<form asp-controller="Order" asp-action="Create">
+    <input class="esh-catalog-button" type="submit" value="[ COMMANDER ]" />
+   <input type="hidden" asp-for="@Model.Id" name="id" />
+</form>*@

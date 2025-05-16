@@ -1,0 +1,32 @@
+﻿@model Sec.Market.MVC.Models.OrderData
+
+@{
+    var item = Model.Product;
+}
+
+<section class="esh-orders_new-section">
+    <article class="esh-orders_new-titles row">
+        <section class="esh-orders_new-title col-12">Detail de la commande</section>
+    </article>
+        <article class="esh-orders_new-items esh-orders_new-items--border row">
+            <section class="esh-orders_new-item col-md-4 hidden-md-down">
+            <img class="esh-orders_new-image" src="~/images/@item.Image"> 
+            </section>
+            <section class="esh-orders_new-item esh-orders_new-item--middle col-4">
+            @item.Name
+            </section>
+        </article>
+</section>
+
+<section class="esh-orders_new-section esh-orders_new-section--right">
+    <article class="esh-orders_new-titles row">
+        <section class="esh-orders_new-title col-9"></section>
+        <section class="esh-orders_new-title col-2">Total</section>
+    </article>
+    <article class="esh-orders_new-items row">
+        <section class="esh-orders_new-item col-9"></section>
+        <section class="esh-orders_new-item esh-orders_new-item--mark col-2">
+            $ @item.Price.ToString("N2")
+        </section>
+    </article>
+</section>

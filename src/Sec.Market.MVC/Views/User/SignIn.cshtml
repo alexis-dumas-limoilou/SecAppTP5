@@ -1,0 +1,45 @@
+﻿@model Sec.Market.MVC.Models.UserToLogin
+
+@{
+    ViewData["Title"] = "Connexion";
+}
+
+<h1>Page de connexion</h1>
+
+<h4>Entrez vos informations </h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="SignIn" asp-route-returnurl="@ViewBag.ReturnUrl">
+            @Html.AntiForgeryToken()
+             <div class="row">
+                @foreach (var error in ViewData.ModelState.Values.SelectMany(err => err.Errors))
+                {
+                    <div class="alert alert-warning" role="alert">
+                        &nbsp;@error.ErrorMessage
+                    </div>
+                }
+            </div>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="UserName" class="control-label"></label>
+                <input asp-for="UserName" class="form-control" />
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+            <br/>
+            <div class="form-group">
+                <label asp-for="Password" class="control-label"></label>
+                <input asp-for="Password" class="form-control" type="password" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+             <br/>
+            <div class="form-group">
+                <input type="submit" value="Connexion" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

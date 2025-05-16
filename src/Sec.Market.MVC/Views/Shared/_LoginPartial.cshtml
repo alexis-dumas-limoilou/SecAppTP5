@@ -1,0 +1,65 @@
+﻿@inject IHttpContextAccessor HttpContextAccessor
+
+
+@if (HttpContextAccessor.HttpContext.Session.GetString("name") != null)
+{
+    <section class="col-lg-4 col-md-5 col-xs-12">
+        <div class="esh-identity">
+            <div class="navbar-right">
+                <section class="esh-identity-section">
+                    <div class="esh-identity-name">@HttpContextAccessor.HttpContext.Session.GetString("name")</div>
+                    <img class="esh-identity-image" src="~/images/arrow-down.png">
+                </section>
+
+                <section class="esh-identity-drop">
+
+                    <a class="esh-identity-item"
+                       asp-controller="Order"
+                       asp-action="Index">
+
+                        <div class="esh-identity-name esh-identity-name--upper">Commandes</div>
+                    </a>
+
+                    @if(HttpContextAccessor.HttpContext.Session.GetString("role")=="Admin")
+                    {
+                    <a class="esh-identity-item"
+                       asp-controller="Product"
+                       asp-action="Liste">
+
+                        <div class="esh-identity-name esh-identity-name--upper">Produits</div>
+                    </a>
+                    }
+
+                    <a class="esh-identity-item"
+                       asp-controller="User"
+                       asp-action="LogOut">
+
+                        <div class="esh-identity-name esh-identity-name--upper">Deconnexion</div>
+                    </a>
+
+                </section>
+            </div>
+        </div>
+    </section>
+
+
+}
+else
+{
+    <section class="col-lg-4 col-md-5 col-xs-12">
+        <div class="esh-identity">
+            <section class="esh-identity-section">
+                <div class="esh-identity-item">
+
+                    <a asp-area="" asp-controller="User" asp-action="SignIn" class="esh-identity-name esh-identity-name--upper">
+                        Login
+                    </a>
+                </div>
+            </section>
+        </div>
+    </section>
+
+    <section class="col-lg-1 col-xs-12">
+
+    </section>
+}
